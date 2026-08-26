@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Monopoli Pembelajaran</title>
 
+
 <style>
+
+/* =====================================================
+   DASAR
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -15,13 +25,14 @@
 body {
     margin: 0;
     background: #163b2c;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     color: #222;
 }
 
-/* =========================
+
+/* =====================================================
    HEADER
-========================= */
+===================================================== */
 
 header {
     background: #163b2c;
@@ -40,9 +51,9 @@ header p {
 }
 
 
-/* =========================
-   SETUP PEMAIN
-========================= */
+/* =====================================================
+   SETUP
+===================================================== */
 
 .setup {
     width: min(700px, 94%);
@@ -60,11 +71,11 @@ header p {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 7px;
-    margin: 10px 0 20px;
+    margin: 15px 0 20px;
 }
 
 .player-count button {
-    padding: 12px;
+    padding: 12px 5px;
     border: 1px solid #aaa;
     border-radius: 8px;
     background: white;
@@ -97,6 +108,7 @@ header p {
     padding: 11px;
     border: 1px solid #bbb;
     border-radius: 7px;
+    font-size: 15px;
 }
 
 .start-button,
@@ -123,9 +135,9 @@ button:disabled {
 }
 
 
-/* =========================
+/* =====================================================
    AREA GAME
-========================= */
+===================================================== */
 
 .game {
     width: min(1450px, 96%);
@@ -140,9 +152,9 @@ button:disabled {
 }
 
 
-/* =========================
+/* =====================================================
    PAPAN
-========================= */
+===================================================== */
 
 .board-container {
     background: #111;
@@ -152,9 +164,10 @@ button:disabled {
 
 .board {
     position: relative;
-    background: white;
+    width: 100%;
     overflow: hidden;
     border-radius: 6px;
+    background: white;
 }
 
 .board img {
@@ -164,9 +177,9 @@ button:disabled {
 }
 
 
-/* =========================
+/* =====================================================
    PION
-========================= */
+===================================================== */
 
 .tokens {
     position: absolute;
@@ -184,7 +197,8 @@ button:disabled {
 
     border: 3px solid white;
 
-    box-shadow: 0 2px 5px #0008;
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.55);
 
     transform: translate(-50%, -50%);
 
@@ -198,14 +212,16 @@ button:disabled {
     font-weight: bold;
 
     transition:
-        left 0.25s ease,
-        top 0.25s ease;
+        left .30s ease,
+        top .30s ease;
+
+    z-index: 20;
 }
 
 
-/* =========================
+/* =====================================================
    PANEL
-========================= */
+===================================================== */
 
 .panel {
     background: #fffdf7;
@@ -264,16 +280,13 @@ button:disabled {
     padding: 10px;
     background: #e8f0ea;
     border-radius: 8px;
-}
-
-.petak-info b {
-    color: #163b2c;
+    line-height: 1.5;
 }
 
 
-/* =========================
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media (max-width: 900px) {
 
@@ -288,19 +301,22 @@ button:disabled {
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- ==================================================
+<!-- =====================================================
      HEADER
-================================================== -->
+===================================================== -->
 
 <header>
 
-    <h1>MONOPOLI PEMBELAJARAN</h1>
+    <h1>
+        MONOPOLI PEMBELAJARAN
+    </h1>
 
     <p>
         Bahasa Indonesia —
@@ -311,37 +327,68 @@ button:disabled {
 
 
 
-<!-- ==================================================
-     SETUP PEMAIN
-================================================== -->
+<!-- =====================================================
+     PENGATURAN PEMAIN
+===================================================== -->
 
 <section
     id="setup"
     class="setup"
 >
 
-    <h2>🎮 Persiapan Permainan</h2>
+    <h2>
+        🎮 Persiapan Permainan
+    </h2>
 
     <p>
         Pilih jumlah pemain.
-        Permainan dapat dimainkan oleh
-        <b>2 sampai 7 pemain</b>.
+        Maksimal 7 pemain.
     </p>
 
 
     <div class="player-count">
 
-        <button onclick="pilihJumlah(2)">2</button>
+        <button
+            data-jumlah="2"
+            onclick="pilihJumlah(2)"
+        >
+            2
+        </button>
 
-        <button onclick="pilihJumlah(3)">3</button>
+        <button
+            data-jumlah="3"
+            onclick="pilihJumlah(3)"
+        >
+            3
+        </button>
 
-        <button onclick="pilihJumlah(4)">4</button>
+        <button
+            data-jumlah="4"
+            onclick="pilihJumlah(4)"
+        >
+            4
+        </button>
 
-        <button onclick="pilihJumlah(5)">5</button>
+        <button
+            data-jumlah="5"
+            onclick="pilihJumlah(5)"
+        >
+            5
+        </button>
 
-        <button onclick="pilihJumlah(6)">6</button>
+        <button
+            data-jumlah="6"
+            onclick="pilihJumlah(6)"
+        >
+            6
+        </button>
 
-        <button onclick="pilihJumlah(7)">7</button>
+        <button
+            data-jumlah="7"
+            onclick="pilihJumlah(7)"
+        >
+            7
+        </button>
 
     </div>
 
@@ -360,9 +407,9 @@ button:disabled {
 
 
 
-<!-- ==================================================
-     AREA GAME
-================================================== -->
+<!-- =====================================================
+     GAME
+===================================================== -->
 
 <section
     id="game"
@@ -370,9 +417,9 @@ button:disabled {
 >
 
 
-    <!-- =========================
+    <!-- =================================================
          PAPAN
-    ========================= -->
+    ================================================== -->
 
     <div class="board-container">
 
@@ -387,8 +434,6 @@ button:disabled {
             >
 
 
-            <!-- PION -->
-
             <div
                 id="tokens"
                 class="tokens"
@@ -400,13 +445,15 @@ button:disabled {
 
 
 
-    <!-- =========================
-         PANEL PERMAINAN
-    ========================= -->
+    <!-- =================================================
+         PANEL
+    ================================================== -->
 
     <div class="panel">
 
-        <h2>🎲 Permainan</h2>
+        <h2>
+            🎲 Permainan
+        </h2>
 
 
         <div id="daftarPemain"></div>
@@ -415,7 +462,10 @@ button:disabled {
         <hr>
 
 
-        <h3>Giliran</h3>
+        <h3>
+            Giliran
+        </h3>
+
 
         <div id="giliran">
             -
@@ -426,7 +476,7 @@ button:disabled {
             id="uangGiliran"
             class="money"
         >
-            Rp0,-
+            Rp15.000,-
         </div>
 
 
@@ -472,273 +522,487 @@ button:disabled {
 <script>
 
 
-/* ==================================================
-   DATA PETAK PAPAN
+/* =====================================================
+   PETA RESMI PAPAN
 
-   PENTING:
+   URUTAN DIMULAI DARI START.
 
-   INDEX 0 = START.
+   ARAH:
 
-   Jadi semua pemain akan memulai
-   tepat dari START.
+   START
+      ↓
+   KE KIRI
+      ↓
+   NAIK SISI KIRI
+      ↓
+   KE KANAN SISI ATAS
+      ↓
+   TURUN SISI KANAN
+      ↓
+   KEMBALI START
 
-   Penjara BUKAN posisi awal.
-
-   Daftar nama/jenis petak akan kita
-   sesuaikan dengan papan asli setelah
-   sistem pergerakan ini berhasil.
-================================================== */
+   Total = 40 petak.
+===================================================== */
 
 
 const PETAK = [
 
+    /* ==============================================
+       BAWAH
+       START → KIRI
+    ============================================== */
+
     {
         id: 0,
         nama: "START",
-        tipe: "start"
+        tipe: "start",
+        harga: 0
     },
 
     {
         id: 1,
-        nama: "Petak 1",
-        tipe: "kosong"
+        nama: "Lampung",
+        tipe: "komplek",
+        harga: 400
     },
 
     {
         id: 2,
-        nama: "Petak 2",
-        tipe: "kosong"
+        nama: "Dana Umum",
+        tipe: "dana-umum",
+        harga: 0
     },
 
     {
         id: 3,
-        nama: "Petak 3",
-        tipe: "kosong"
+        nama: "Jambi",
+        tipe: "komplek",
+        harga: 400
     },
 
     {
         id: 4,
-        nama: "Petak 4",
-        tipe: "kosong"
+        nama: "Bayar Pajak",
+        tipe: "pajak",
+        harga: 20
     },
 
     {
         id: 5,
-        nama: "Petak 5",
-        tipe: "kosong"
+        nama: "Bandara",
+        tipe: "bandara",
+        harga: 2600
     },
 
     {
         id: 6,
-        nama: "Petak 6",
-        tipe: "kosong"
+        nama: "Riau",
+        tipe: "komplek",
+        harga: 700
     },
 
     {
         id: 7,
-        nama: "Petak 7",
-        tipe: "kosong"
+        nama: "Kesempatan",
+        tipe: "kesempatan",
+        harga: 0
     },
 
     {
         id: 8,
-        nama: "Petak 8",
-        tipe: "kosong"
+        nama: "Sumut",
+        tipe: "komplek",
+        harga: 900
     },
 
     {
         id: 9,
-        nama: "Petak 9",
-        tipe: "kosong"
+        nama: "Aceh",
+        tipe: "komplek",
+        harga: 1200
     },
+
+
+    /* ==============================================
+       SISI KIRI
+       BAWAH → ATAS
+    ============================================== */
 
     {
         id: 10,
-        nama: "Petak 10",
-        tipe: "kosong"
+        nama: "Masuk Penjara",
+        tipe: "penjara",
+        harga: 0
     },
 
     {
         id: 11,
-        nama: "Petak 11",
-        tipe: "kosong"
+        nama: "Kalbar",
+        tipe: "komplek",
+        harga: 1400
     },
 
     {
         id: 12,
-        nama: "Petak 12",
-        tipe: "kosong"
+        nama: "Terminal",
+        tipe: "terminal",
+        harga: 2600
     },
 
     {
         id: 13,
-        nama: "Petak 13",
-        tipe: "kosong"
+        nama: "Kalteng",
+        tipe: "komplek",
+        harga: 1600
     },
 
     {
         id: 14,
-        nama: "Petak 14",
-        tipe: "kosong"
+        nama: "Kaltim",
+        tipe: "komplek",
+        harga: 1800
     },
 
     {
         id: 15,
-        nama: "Petak 15",
-        tipe: "kosong"
+        nama: "Bonus Gaji",
+        tipe: "bonus-gaji",
+        harga: 100
     },
 
     {
         id: 16,
-        nama: "Petak 16",
-        tipe: "kosong"
+        nama: "Sulbar",
+        tipe: "komplek",
+        harga: 2000
     },
 
     {
         id: 17,
-        nama: "Petak 17",
-        tipe: "kosong"
+        nama: "Kesempatan",
+        tipe: "kesempatan",
+        harga: 0
     },
 
     {
         id: 18,
-        nama: "Petak 18",
-        tipe: "kosong"
+        nama: "Sulteng",
+        tipe: "komplek",
+        harga: 2200
     },
 
     {
         id: 19,
-        nama: "Petak 19",
-        tipe: "kosong"
+        nama: "Sulsel",
+        tipe: "komplek",
+        harga: 2200
     },
+
+
+    /* ==============================================
+       ATAS
+       KIRI → KANAN
+    ============================================== */
 
     {
         id: 20,
-        nama: "Petak 20",
-        tipe: "kosong"
+        nama: "Parkir Bebas",
+        tipe: "parkir",
+        harga: 0
     },
 
     {
         id: 21,
-        nama: "Petak 21",
-        tipe: "kosong"
+        nama: "Maluku",
+        tipe: "komplek",
+        harga: 2400
     },
 
     {
         id: 22,
-        nama: "Petak 22",
-        tipe: "kosong"
+        nama: "Listrik",
+        tipe: "listrik",
+        harga: 20
     },
 
     {
         id: 23,
-        nama: "Petak 23",
-        tipe: "kosong"
+        nama: "Papua B",
+        tipe: "komplek",
+        harga: 2600
     },
 
     {
         id: 24,
-        nama: "Petak 24",
-        tipe: "kosong"
+        nama: "Papua A",
+        tipe: "komplek",
+        harga: 2800
     },
 
     {
         id: 25,
-        nama: "Petak 25",
-        tipe: "kosong"
+        nama: "Pelabuhan",
+        tipe: "pelabuhan",
+        harga: 3600
     },
 
     {
         id: 26,
-        nama: "Petak 26",
-        tipe: "kosong"
+        nama: "NTT",
+        tipe: "komplek",
+        harga: 3000
     },
 
     {
         id: 27,
-        nama: "Petak 27",
-        tipe: "kosong"
+        nama: "NTB",
+        tipe: "komplek",
+        harga: 3200
     },
 
     {
         id: 28,
-        nama: "Petak 28",
-        tipe: "kosong"
+        nama: "Dana Umum",
+        tipe: "dana-umum",
+        harga: 0
     },
 
     {
         id: 29,
-        nama: "Petak 29",
-        tipe: "kosong"
+        nama: "Bali",
+        tipe: "komplek",
+        harga: 3600
     },
+
+
+    /* ==============================================
+       SISI KANAN
+       ATAS → BAWAH
+    ============================================== */
 
     {
         id: 30,
-        nama: "Petak 30",
-        tipe: "kosong"
+        nama: "Korupsi",
+        tipe: "korupsi",
+        harga: 0
     },
 
     {
         id: 31,
-        nama: "Petak 31",
-        tipe: "kosong"
+        nama: "Jatim",
+        tipe: "komplek",
+        harga: 3800
     },
 
     {
         id: 32,
-        nama: "Petak 32",
-        tipe: "kosong"
+        nama: "Jateng",
+        tipe: "komplek",
+        harga: 4000
     },
 
     {
         id: 33,
-        nama: "Petak 33",
-        tipe: "kosong"
+        nama: "Kesempatan",
+        tipe: "kesempatan",
+        harga: 0
     },
 
     {
         id: 34,
-        nama: "Petak 34",
-        tipe: "kosong"
+        nama: "Jabar",
+        tipe: "komplek",
+        harga: 4200
     },
 
     {
         id: 35,
-        nama: "Petak 35",
-        tipe: "kosong"
+        nama: "Bayar Air",
+        tipe: "air",
+        harga: 40
     },
 
     {
         id: 36,
-        nama: "Petak 36",
-        tipe: "kosong"
+        nama: "Dana Umum",
+        tipe: "dana-umum",
+        harga: 0
     },
 
     {
         id: 37,
-        nama: "Petak 37",
-        tipe: "kosong"
+        nama: "Yogyakarta",
+        tipe: "komplek",
+        harga: 4600
     },
 
     {
         id: 38,
-        nama: "Petak 38",
-        tipe: "kosong"
+        nama: "Bayar BPJS",
+        tipe: "bpjs",
+        harga: 50
     },
 
     {
         id: 39,
-        nama: "Petak 39",
-        tipe: "kosong"
+        nama: "Jakarta",
+        tipe: "komplek",
+        harga: 5000
+
     }
 
 ];
 
 
 
-/* ==================================================
+/* =====================================================
+   KOORDINAT PION
+
+   INI BAGIAN YANG SANGAT PENTING.
+
+   Karena papanmu berbentuk persegi 2000 x 2000,
+   pusat masing-masing petak berada kira-kira
+   pada interval 175 px.
+
+   START = sudut kanan bawah.
+
+   Urutan koordinat dibuat mengikuti
+   gambar papanmu.
+===================================================== */
+
+
+const KOORDINAT = [
+
+    /* 0  START */
+    { x: 93.75, y: 93.75 },
+
+    /* 1  Lampung */
+    { x: 85.00, y: 93.75 },
+
+    /* 2  Dana Umum */
+    { x: 76.25, y: 93.75 },
+
+    /* 3  Jambi */
+    { x: 67.50, y: 93.75 },
+
+    /* 4  Pajak */
+    { x: 58.75, y: 93.75 },
+
+    /* 5  Bandara */
+    { x: 50.00, y: 93.75 },
+
+    /* 6  Riau */
+    { x: 41.25, y: 93.75 },
+
+    /* 7  Kesempatan */
+    { x: 32.50, y: 93.75 },
+
+    /* 8  Sumut */
+    { x: 23.75, y: 93.75 },
+
+    /* 9  Aceh */
+    { x: 15.00, y: 93.75 },
+
+    /* 10 Masuk Penjara */
+    { x: 6.25, y: 93.75 },
+
+
+    /* 11 Kalbar */
+    { x: 6.25, y: 85.00 },
+
+    /* 12 Terminal */
+    { x: 6.25, y: 76.25 },
+
+    /* 13 Kalteng */
+    { x: 6.25, y: 67.50 },
+
+    /* 14 Kaltim */
+    { x: 6.25, y: 58.75 },
+
+    /* 15 Bonus Gaji */
+    { x: 6.25, y: 50.00 },
+
+    /* 16 Sulbar */
+    { x: 6.25, y: 41.25 },
+
+    /* 17 Kesempatan */
+    { x: 6.25, y: 32.50 },
+
+    /* 18 Sulteng */
+    { x: 6.25, y: 23.75 },
+
+    /* 19 Sulsel */
+    { x: 6.25, y: 15.00 },
+
+    /* 20 Parkir Bebas */
+    { x: 6.25, y: 6.25 },
+
+
+    /* 21 Maluku */
+    { x: 15.00, y: 6.25 },
+
+    /* 22 Listrik */
+    { x: 23.75, y: 6.25 },
+
+    /* 23 Papua B */
+    { x: 32.50, y: 6.25 },
+
+    /* 24 Papua A */
+    { x: 41.25, y: 6.25 },
+
+    /* 25 Pelabuhan */
+    { x: 50.00, y: 6.25 },
+
+    /* 26 NTT */
+    { x: 58.75, y: 6.25 },
+
+    /* 27 NTB */
+    { x: 67.50, y: 6.25 },
+
+    /* 28 Dana Umum */
+    { x: 76.25, y: 6.25 },
+
+    /* 29 Bali */
+    { x: 85.00, y: 6.25 },
+
+    /* 30 Korupsi */
+    { x: 93.75, y: 6.25 },
+
+
+    /* 31 Jatim */
+    { x: 93.75, y: 15.00 },
+
+    /* 32 Jateng */
+    { x: 93.75, y: 23.75 },
+
+    /* 33 Kesempatan */
+    { x: 93.75, y: 32.50 },
+
+    /* 34 Jabar */
+    { x: 93.75, y: 41.25 },
+
+    /* 35 Bayar Air */
+    { x: 93.75, y: 50.00 },
+
+    /* 36 Dana Umum */
+    { x: 93.75, y: 58.75 },
+
+    /* 37 Yogyakarta */
+    { x: 93.75, y: 67.50 },
+
+    /* 38 Bayar BPJS */
+    { x: 93.75, y: 76.25 },
+
+    /* 39 Jakarta */
+    { x: 93.75, y: 85.00 }
+
+];
+
+
+
+/* =====================================================
    DATA PEMAIN
-================================================== */
+===================================================== */
 
 
 let jumlahPemain = 2;
@@ -770,10 +1034,9 @@ const warnaPemain = [
 
 
 
-/* ==================================================
+/* =====================================================
    PILIH JUMLAH PEMAIN
-================================================== */
-
+===================================================== */
 
 function pilihJumlah(jumlah) {
 
@@ -792,9 +1055,9 @@ function pilihJumlah(jumlah) {
     const tombol =
 
         document.querySelector(
-            '.player-count button:nth-child(' +
-            (jumlah - 1) +
-            ')'
+            '.player-count button[data-jumlah="' +
+            jumlah +
+            '"]'
         );
 
 
@@ -811,18 +1074,14 @@ function pilihJumlah(jumlah) {
 
 
 
-/* ==================================================
-   INPUT NAMA PEMAIN
-================================================== */
-
+/* =====================================================
+   INPUT NAMA
+===================================================== */
 
 function buatInputNama() {
 
     const container =
-
-        document.getElementById(
-            "namaPemain"
-        );
+        document.getElementById("namaPemain");
 
 
     container.innerHTML = "";
@@ -858,10 +1117,9 @@ function buatInputNama() {
 
 
 
-/* ==================================================
+/* =====================================================
    MULAI PERMAINAN
-================================================== */
-
+===================================================== */
 
 function mulaiPermainan() {
 
@@ -875,14 +1133,12 @@ function mulaiPermainan() {
     ) {
 
         const input =
-
             document.getElementById(
                 "nama" + i
             );
 
 
         let nama =
-
             input
             ? input.value.trim()
             : "";
@@ -891,7 +1147,8 @@ function mulaiPermainan() {
         if (!nama) {
 
             nama =
-                "Pemain " + (i + 1);
+                "Pemain " +
+                (i + 1);
 
         }
 
@@ -905,11 +1162,9 @@ function mulaiPermainan() {
             uang: 15000,
 
             /*
-             * SANGAT PENTING:
+             * POSISI AWAL:
              *
-             * posisi 0 = START
-             *
-             * Bukan Penjara.
+             * 0 = START
              */
 
             posisi: 0,
@@ -950,23 +1205,20 @@ function mulaiPermainan() {
         .textContent =
 
         "Permainan dimulai dari START. " +
-        "Giliran " +
-        pemain[0].nama +
-        ".";
+        "Pemain bergerak ke kiri " +
+        "sesuai arah jarum jam.";
 
 }
 
 
 
-/* ==================================================
+/* =====================================================
    TAMPILKAN PEMAIN
-================================================== */
-
+===================================================== */
 
 function tampilkanPemain() {
 
     const container =
-
         document.getElementById(
             "daftarPemain"
         );
@@ -978,7 +1230,9 @@ function tampilkanPemain() {
     pemain.forEach(function(p, i) {
 
         const div =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         div.className =
@@ -1023,10 +1277,9 @@ function tampilkanPemain() {
 
 
 
-/* ==================================================
+/* =====================================================
    TAMPILKAN GILIRAN
-================================================== */
-
+===================================================== */
 
 function tampilkanGiliran() {
 
@@ -1059,10 +1312,9 @@ function tampilkanGiliran() {
 
 
 
-/* ==================================================
+/* =====================================================
    TAMPILKAN PETAK
-================================================== */
-
+===================================================== */
 
 function tampilkanPetak() {
 
@@ -1081,24 +1333,41 @@ function tampilkanPetak() {
         PETAK[p.posisi];
 
 
-    document
-        .getElementById("petakInfo")
-        .innerHTML =
-
+    let teks =
         "<b>Posisi:</b> " +
-        petak.nama +
+        petak.nama;
+
+
+    teks +=
         "<br>" +
         "<b>Nomor petak:</b> " +
         petak.id;
+
+
+    if (
+        petak.harga > 0
+    ) {
+
+        teks +=
+            "<br>" +
+            "<b>Harga:</b> " +
+            formatUang(petak.harga);
+
+    }
+
+
+    document
+        .getElementById("petakInfo")
+        .innerHTML =
+        teks;
 
 }
 
 
 
-/* ==================================================
+/* =====================================================
    FORMAT UANG
-================================================== */
-
+===================================================== */
 
 function formatUang(jumlah) {
 
@@ -1106,7 +1375,8 @@ function formatUang(jumlah) {
 
         "Rp" +
 
-        jumlah.toLocaleString("id-ID") +
+        Number(jumlah)
+            .toLocaleString("id-ID") +
 
         ",-"
 
@@ -1116,10 +1386,9 @@ function formatUang(jumlah) {
 
 
 
-/* ==================================================
+/* =====================================================
    LEMPAR DADU
-================================================== */
-
+===================================================== */
 
 function lemparDadu() {
 
@@ -1131,7 +1400,6 @@ function lemparDadu() {
 
 
     const tombol =
-
         document.getElementById(
             "lempar"
         );
@@ -1141,7 +1409,6 @@ function lemparDadu() {
 
 
     const angka =
-
         Math.floor(
             Math.random() * 6
         ) + 1;
@@ -1164,8 +1431,6 @@ function lemparDadu() {
         p.nama +
         " mendapatkan angka " +
         angka +
-        ". Pion bergerak dari " +
-        PETAK[p.posisi].nama +
         ".";
 
 
@@ -1178,10 +1443,25 @@ function lemparDadu() {
 
 
 
-/* ==================================================
+/* =====================================================
    GERAK PION
-================================================== */
 
+   INI ARAH UTAMA GAME.
+
+   posisi bertambah:
+
+   0 → 1 → 2 → 3 ...
+
+   Artinya:
+
+   START
+   → Lampung
+   → Dana Umum
+   → Jambi
+   → ...
+
+   sehingga gerakan pertama memang KE KIRI.
+===================================================== */
 
 function bergerakPion(
     p,
@@ -1191,36 +1471,38 @@ function bergerakPion(
     let jalan = 0;
 
 
-    const posisiAwal =
+    const posisiSebelum =
         p.posisi;
 
 
     const interval =
-
         setInterval(function() {
 
-            /*
-             * Bergerak SATU PETAK
-             * setiap langkah.
-             */
+
+            /* -----------------------------------------
+               SATU LANGKAH
+            ----------------------------------------- */
 
             p.posisi++;
 
 
-            /*
-             * Jika melewati petak terakhir,
-             * kembali ke START.
-             */
+            /* -----------------------------------------
+               MELEWATI START
+
+               Dari Jakarta (39)
+               menuju START (0)
+            ----------------------------------------- */
 
             if (
-                p.posisi >= PETAK.length
+                p.posisi >=
+                PETAK.length
             ) {
 
                 p.posisi = 0;
 
 
                 /*
-                 * Bonus ketika melewati START.
+                 * Bonus melewati START.
                  */
 
                 p.uang += 200;
@@ -1232,7 +1514,7 @@ function bergerakPion(
 
                     p.nama +
                     " melewati START " +
-                    "dan mendapatkan bonus " +
+                    "dan menerima bonus " +
                     formatUang(200) +
                     ".";
 
@@ -1248,6 +1530,10 @@ function bergerakPion(
 
             jalan++;
 
+
+            /* -----------------------------------------
+               SELESAI BERJALAN
+            ----------------------------------------- */
 
             if (
                 jalan >= langkah
@@ -1279,122 +1565,22 @@ function bergerakPion(
 
             }
 
+
         }, 350);
 
 }
 
 
 
-/* ==================================================
-   KOORDINAT PION
-
-   CATATAN:
-
-   Ini masih koordinat sementara.
-
-   Setelah urutan petak papan kita
-   pastikan, koordinat ini akan
-   disesuaikan dengan posisi sebenarnya
-   pada gambar papanmu.
-================================================== */
-
-
-function posisiPapan(posisi) {
-
-    /*
-     * BARIS BAWAH
-     *
-     * START berada sebagai titik awal.
-     */
-
-    if (posisi <= 10) {
-
-        return {
-
-            left:
-                5 +
-                posisi * 9 +
-                "%",
-
-            top:
-                "95%"
-
-        };
-
-    }
-
-
-    /*
-     * SISI KANAN
-     */
-
-    if (posisi <= 20) {
-
-        return {
-
-            left:
-                "95%",
-
-            top:
-                95 -
-                (posisi - 10) * 9 +
-                "%"
-
-        };
-
-    }
-
-
-    /*
-     * BARIS ATAS
-     */
-
-    if (posisi <= 30) {
-
-        return {
-
-            left:
-                95 -
-                (posisi - 20) * 9 +
-                "%",
-
-            top:
-                "5%"
-
-        };
-
-    }
-
-
-    /*
-     * SISI KIRI
-     */
-
-    return {
-
-        left:
-            "5%",
-
-        top:
-            5 +
-            (posisi - 30) * 9 +
-            "%"
-
-    };
-
-}
-
-
-
-/* ==================================================
+/* =====================================================
    TAMPILKAN PION
-================================================== */
 
+   Koordinat mengikuti gambar asli.
+===================================================== */
 
 function tampilkanPion() {
 
     const container =
-
         document.getElementById(
             "tokens"
         );
@@ -1403,10 +1589,100 @@ function tampilkanPion() {
     container.innerHTML = "";
 
 
+    /*
+     * Menghitung pemain yang
+     * sedang berada pada petak yang sama.
+     */
+
+    const jumlahDiPetak = {};
+
+
     pemain.forEach(function(p) {
 
-        const pion =
+        if (
+            !jumlahDiPetak[p.posisi]
+        ) {
 
+            jumlahDiPetak[p.posisi] = [];
+
+        }
+
+
+        jumlahDiPetak[p.posisi]
+            .push(p);
+
+    });
+
+
+    pemain.forEach(function(p) {
+
+        const koordinat =
+            KOORDINAT[p.posisi];
+
+
+        const daftar =
+            jumlahDiPetak[p.posisi];
+
+
+        const urutan =
+            daftar.indexOf(p);
+
+
+        /*
+         * Jika beberapa pemain berada
+         * pada petak yang sama,
+         * pion sedikit digeser agar
+         * semuanya tetap terlihat.
+         */
+
+        let offsetX = 0;
+
+        let offsetY = 0;
+
+
+        if (
+            daftar.length > 1
+        ) {
+
+            const pola = [
+
+                [-1, -1],
+
+                [1, -1],
+
+                [-1, 1],
+
+                [1, 1],
+
+                [0, -1],
+
+                [0, 1],
+
+                [0, 0]
+
+            ];
+
+
+            const posisiOffset =
+                pola[
+                    urutan %
+                    pola.length
+                ];
+
+
+            offsetX =
+                posisiOffset[0] *
+                1.2;
+
+
+            offsetY =
+                posisiOffset[1] *
+                1.2;
+
+        }
+
+
+        const pion =
             document.createElement(
                 "div"
             );
@@ -1416,18 +1692,18 @@ function tampilkanPion() {
             "token";
 
 
-        const posisi =
-            posisiPapan(
-                p.posisi
-            );
-
-
         pion.style.left =
-            posisi.left;
+            (
+                koordinat.x +
+                offsetX
+            ) + "%";
 
 
         pion.style.top =
-            posisi.top;
+            (
+                koordinat.y +
+                offsetY
+            ) + "%";
 
 
         pion.style.background =
@@ -1436,6 +1712,10 @@ function tampilkanPion() {
 
         pion.textContent =
             p.id + 1;
+
+
+        pion.title =
+            p.nama;
 
 
         container.appendChild(
@@ -1448,10 +1728,9 @@ function tampilkanPion() {
 
 
 
-/* ==================================================
+/* =====================================================
    GANTI GILIRAN
-================================================== */
-
+===================================================== */
 
 function gantiGiliran() {
 
@@ -1490,11 +1769,12 @@ function gantiGiliran() {
 
 
 
-/* ==================================================
-   MULAI FORM PEMAIN
-================================================== */
+/* =====================================================
+   INISIALISASI
+===================================================== */
 
 pilihJumlah(2);
+
 
 </script>
 
