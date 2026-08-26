@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Monopoli Pembelajaran</title>
 
-
 <style>
-
-/* =====================================================
-   DASAR
-===================================================== */
 
 * {
     box-sizing: border-box;
@@ -24,21 +14,24 @@
 
 body {
     margin: 0;
-    background: #163b2c;
     font-family: Arial, Helvetica, sans-serif;
+    background: #163b2c;
     color: #222;
 }
 
+.hidden {
+    display: none !important;
+}
 
-/* =====================================================
+/* ================================
    HEADER
-===================================================== */
+================================ */
 
 header {
     background: #163b2c;
     color: white;
     text-align: center;
-    padding: 15px;
+    padding: 14px;
 }
 
 header h1 {
@@ -50,10 +43,9 @@ header p {
     margin: 5px 0 0;
 }
 
-
-/* =====================================================
+/* ================================
    SETUP
-===================================================== */
+================================ */
 
 .setup {
     width: min(700px, 94%);
@@ -63,15 +55,11 @@ header p {
     border-radius: 15px;
 }
 
-.setup h2 {
-    color: #163b2c;
-}
-
 .player-count {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 7px;
-    margin: 15px 0 20px;
+    margin: 15px 0;
 }
 
 .player-count button {
@@ -134,10 +122,9 @@ button:disabled {
     cursor: not-allowed;
 }
 
-
-/* =====================================================
-   AREA GAME
-===================================================== */
+/* ================================
+   GAME
+================================ */
 
 .game {
     width: min(1450px, 96%);
@@ -147,14 +134,9 @@ button:disabled {
     gap: 15px;
 }
 
-.hidden {
-    display: none;
-}
-
-
-/* =====================================================
-   PAPAN
-===================================================== */
+/* ================================
+   BOARD
+================================ */
 
 .board-container {
     background: #111;
@@ -176,11 +158,6 @@ button:disabled {
     height: auto;
 }
 
-
-/* =====================================================
-   PION
-===================================================== */
-
 .tokens {
     position: absolute;
     inset: 0;
@@ -189,39 +166,26 @@ button:disabled {
 
 .token {
     position: absolute;
-
     width: 30px;
     height: 30px;
-
     border-radius: 50%;
-
     border: 3px solid white;
-
-    box-shadow:
-        0 2px 5px rgba(0,0,0,.55);
-
+    box-shadow: 0 2px 5px rgba(0,0,0,.55);
     transform: translate(-50%, -50%);
-
     display: grid;
     place-items: center;
-
     color: white;
-
     font-size: 12px;
-
     font-weight: bold;
-
     transition:
         left .30s ease,
         top .30s ease;
-
     z-index: 20;
 }
 
-
-/* =====================================================
+/* ================================
    PANEL
-===================================================== */
+================================ */
 
 .panel {
     background: #fffdf7;
@@ -247,12 +211,9 @@ button:disabled {
 
 .player-color {
     display: inline-block;
-
     width: 14px;
     height: 14px;
-
     border-radius: 50%;
-
     margin-right: 5px;
 }
 
@@ -283,10 +244,132 @@ button:disabled {
     line-height: 1.5;
 }
 
+/* ================================
+   MODAL SOAL
+================================ */
 
-/* =====================================================
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.72);
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.question-box {
+    width: min(700px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,.4);
+}
+
+.question-title {
+    color: #163b2c;
+    margin-top: 0;
+}
+
+.question-text {
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 18px 0;
+}
+
+.answer-list {
+    display: grid;
+    gap: 10px;
+}
+
+.answer-button {
+    text-align: left;
+    padding: 14px;
+
+    border: 2px solid #ddd;
+    background: #fafafa;
+
+    border-radius: 9px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.answer-button:hover {
+    background: #edf3ef;
+    border-color: #163b2c;
+}
+
+.answer-button.correct {
+    background: #d8f3dc;
+    border-color: #2a9d62;
+}
+
+.answer-button.wrong {
+    background: #ffd6d6;
+    border-color: #d62828;
+}
+
+.result-box {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 9px;
+    line-height: 1.6;
+}
+
+.result-correct {
+    background: #d8f3dc;
+}
+
+.result-wrong {
+    background: #ffd6d6;
+}
+
+.action-button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 15px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #163b2c;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.buy-button {
+    background: #b7791f;
+}
+
+.cancel-button {
+    background: #555;
+}
+
+/* ================================
+   KEPEMILIKAN
+================================ */
+
+.owner {
+    font-weight: bold;
+    color: #7b3fb5;
+}
+
+/* ================================
    RESPONSIVE
-===================================================== */
+================================ */
 
 @media (max-width: 900px) {
 
@@ -301,16 +384,11 @@ button:disabled {
 }
 
 </style>
-
 </head>
 
 
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
 
 <header>
 
@@ -319,16 +397,14 @@ button:disabled {
     </h1>
 
     <p>
-        Bahasa Indonesia —
         Fungsi Kalimat & Ragam Paragraf
     </p>
 
 </header>
 
 
-
 <!-- =====================================================
-     PENGATURAN PEMAIN
+     SETUP PEMAIN
 ===================================================== -->
 
 <section
@@ -344,7 +420,6 @@ button:disabled {
         Pilih jumlah pemain.
         Maksimal 7 pemain.
     </p>
-
 
     <div class="player-count">
 
@@ -416,11 +491,6 @@ button:disabled {
     class="game hidden"
 >
 
-
-    <!-- =================================================
-         PAPAN
-    ================================================== -->
-
     <div class="board-container">
 
         <div
@@ -430,9 +500,8 @@ button:disabled {
 
             <img
                 src="assets/papan-monopoli.jpg"
-                alt="Papan Monopoli Pembelajaran"
+                alt="Papan Monopoli"
             >
-
 
             <div
                 id="tokens"
@@ -445,32 +514,23 @@ button:disabled {
 
 
 
-    <!-- =================================================
-         PANEL
-    ================================================== -->
-
     <div class="panel">
 
         <h2>
             🎲 Permainan
         </h2>
 
-
         <div id="daftarPemain"></div>
 
-
         <hr>
-
 
         <h3>
             Giliran
         </h3>
 
-
         <div id="giliran">
             -
         </div>
-
 
         <div
             id="uangGiliran"
@@ -479,14 +539,12 @@ button:disabled {
             Rp15.000,-
         </div>
 
-
         <div
             id="dadu"
             class="dice"
         >
             🎲
         </div>
-
 
         <button
             id="lempar"
@@ -496,7 +554,6 @@ button:disabled {
             LEMPAR DADU
         </button>
 
-
         <div
             id="status"
             class="status"
@@ -504,13 +561,11 @@ button:disabled {
             Permainan siap.
         </div>
 
-
         <div
             id="petakInfo"
             class="petak-info"
         >
-            <b>Posisi:</b>
-            START
+            <b>Posisi:</b> START
         </div>
 
     </div>
@@ -519,38 +574,66 @@ button:disabled {
 
 
 
+<!-- =====================================================
+     MODAL SOAL
+===================================================== -->
+
+<div
+    id="questionModal"
+    class="modal hidden"
+>
+
+    <div class="question-box">
+
+        <h2
+            id="questionTitle"
+            class="question-title"
+        >
+            Pertanyaan
+        </h2>
+
+        <div
+            id="questionText"
+            class="question-text"
+        ></div>
+
+        <div
+            id="answerList"
+            class="answer-list"
+        ></div>
+
+        <div
+            id="questionResult"
+            class="result-box hidden"
+        ></div>
+
+        <button
+            id="questionClose"
+            class="action-button hidden"
+            onclick="tutupPertanyaan()"
+        >
+            LANJUTKAN
+        </button>
+
+    </div>
+
+</div>
+
+
+
 <script>
 
 
 /* =====================================================
-   PETA RESMI PAPAN
+   DATA PETAK
 
    URUTAN DIMULAI DARI START.
 
-   ARAH:
-
-   START
-      ↓
-   KE KIRI
-      ↓
-   NAIK SISI KIRI
-      ↓
-   KE KANAN SISI ATAS
-      ↓
-   TURUN SISI KANAN
-      ↓
-   KEMBALI START
-
-   Total = 40 petak.
+   START → KIRI → ATAS → KANAN → BAWAH
 ===================================================== */
 
 
 const PETAK = [
-
-    /* ==============================================
-       BAWAH
-       START → KIRI
-    ============================================== */
 
     {
         id: 0,
@@ -622,12 +705,6 @@ const PETAK = [
         harga: 1200
     },
 
-
-    /* ==============================================
-       SISI KIRI
-       BAWAH → ATAS
-    ============================================== */
-
     {
         id: 10,
         nama: "Masuk Penjara",
@@ -697,12 +774,6 @@ const PETAK = [
         tipe: "komplek",
         harga: 2200
     },
-
-
-    /* ==============================================
-       ATAS
-       KIRI → KANAN
-    ============================================== */
 
     {
         id: 20,
@@ -774,12 +845,6 @@ const PETAK = [
         harga: 3600
     },
 
-
-    /* ==============================================
-       SISI KANAN
-       ATAS → BAWAH
-    ============================================== */
-
     {
         id: 30,
         nama: "Korupsi",
@@ -848,7 +913,6 @@ const PETAK = [
         nama: "Jakarta",
         tipe: "komplek",
         harga: 5000
-
     }
 
 ];
@@ -857,143 +921,52 @@ const PETAK = [
 
 /* =====================================================
    KOORDINAT PION
-
-   INI BAGIAN YANG SANGAT PENTING.
-
-   Karena papanmu berbentuk persegi 2000 x 2000,
-   pusat masing-masing petak berada kira-kira
-   pada interval 175 px.
-
-   START = sudut kanan bawah.
-
-   Urutan koordinat dibuat mengikuti
-   gambar papanmu.
 ===================================================== */
-
 
 const KOORDINAT = [
 
-    /* 0  START */
     { x: 93.75, y: 93.75 },
-
-    /* 1  Lampung */
     { x: 85.00, y: 93.75 },
-
-    /* 2  Dana Umum */
     { x: 76.25, y: 93.75 },
-
-    /* 3  Jambi */
     { x: 67.50, y: 93.75 },
-
-    /* 4  Pajak */
     { x: 58.75, y: 93.75 },
-
-    /* 5  Bandara */
     { x: 50.00, y: 93.75 },
-
-    /* 6  Riau */
     { x: 41.25, y: 93.75 },
-
-    /* 7  Kesempatan */
     { x: 32.50, y: 93.75 },
-
-    /* 8  Sumut */
     { x: 23.75, y: 93.75 },
-
-    /* 9  Aceh */
     { x: 15.00, y: 93.75 },
 
-    /* 10 Masuk Penjara */
     { x: 6.25, y: 93.75 },
-
-
-    /* 11 Kalbar */
     { x: 6.25, y: 85.00 },
-
-    /* 12 Terminal */
     { x: 6.25, y: 76.25 },
-
-    /* 13 Kalteng */
     { x: 6.25, y: 67.50 },
-
-    /* 14 Kaltim */
     { x: 6.25, y: 58.75 },
-
-    /* 15 Bonus Gaji */
     { x: 6.25, y: 50.00 },
-
-    /* 16 Sulbar */
     { x: 6.25, y: 41.25 },
-
-    /* 17 Kesempatan */
     { x: 6.25, y: 32.50 },
-
-    /* 18 Sulteng */
     { x: 6.25, y: 23.75 },
-
-    /* 19 Sulsel */
     { x: 6.25, y: 15.00 },
 
-    /* 20 Parkir Bebas */
     { x: 6.25, y: 6.25 },
-
-
-    /* 21 Maluku */
     { x: 15.00, y: 6.25 },
-
-    /* 22 Listrik */
     { x: 23.75, y: 6.25 },
-
-    /* 23 Papua B */
     { x: 32.50, y: 6.25 },
-
-    /* 24 Papua A */
     { x: 41.25, y: 6.25 },
-
-    /* 25 Pelabuhan */
     { x: 50.00, y: 6.25 },
-
-    /* 26 NTT */
     { x: 58.75, y: 6.25 },
-
-    /* 27 NTB */
     { x: 67.50, y: 6.25 },
-
-    /* 28 Dana Umum */
     { x: 76.25, y: 6.25 },
-
-    /* 29 Bali */
     { x: 85.00, y: 6.25 },
 
-    /* 30 Korupsi */
     { x: 93.75, y: 6.25 },
-
-
-    /* 31 Jatim */
     { x: 93.75, y: 15.00 },
-
-    /* 32 Jateng */
     { x: 93.75, y: 23.75 },
-
-    /* 33 Kesempatan */
     { x: 93.75, y: 32.50 },
-
-    /* 34 Jabar */
     { x: 93.75, y: 41.25 },
-
-    /* 35 Bayar Air */
     { x: 93.75, y: 50.00 },
-
-    /* 36 Dana Umum */
     { x: 93.75, y: 58.75 },
-
-    /* 37 Yogyakarta */
     { x: 93.75, y: 67.50 },
-
-    /* 38 Bayar BPJS */
     { x: 93.75, y: 76.25 },
-
-    /* 39 Jakarta */
     { x: 93.75, y: 85.00 }
 
 ];
@@ -1001,9 +974,8 @@ const KOORDINAT = [
 
 
 /* =====================================================
-   DATA PEMAIN
+   PENGATURAN PERMAINAN
 ===================================================== */
-
 
 let jumlahPemain = 2;
 
@@ -1013,22 +985,327 @@ let pemainAktif = 0;
 
 let sedangBerjalan = false;
 
+let prosesSoal = null;
+
+
+/*
+ * SEWA MINIMUM
+ *
+ * Untuk sementara:
+ * 50% dari harga komplek.
+ *
+ * Nanti bisa kita ubah berdasarkan
+ * aturan final permainan.
+ */
+
+function sewaMinimum(petak) {
+
+    return Math.floor(
+        petak.harga / 2
+    );
+
+}
+
 
 const warnaPemain = [
 
     "#d62828",
-
     "#2474d2",
-
     "#2a9d62",
-
     "#f4a261",
-
     "#7b3fb5",
-
     "#008c95",
-
     "#e07a00"
+
+];
+
+
+
+/* =====================================================
+   BANK SOAL
+===================================================== */
+
+const SOAL = [
+
+    {
+        pertanyaan:
+            'Dalam kalimat "Rina membaca buku", kata "Rina" berfungsi sebagai...',
+
+        pilihan: [
+            "Predikat",
+            "Subjek",
+            "Objek",
+            "Keterangan"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Dalam kalimat "Rina membaca buku", kata "membaca" berfungsi sebagai...',
+
+        pilihan: [
+            "Subjek",
+            "Predikat",
+            "Objek",
+            "Pelengkap"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Dalam kalimat "Rina membaca buku", kata "buku" berfungsi sebagai...',
+
+        pilihan: [
+            "Subjek",
+            "Predikat",
+            "Objek",
+            "Keterangan"
+        ],
+
+        jawaban: 2
+    },
+
+    {
+        pertanyaan:
+            'Dalam kalimat "Rina membaca buku di kelas", frasa "di kelas" berfungsi sebagai...',
+
+        pilihan: [
+            "Subjek",
+            "Predikat",
+            "Objek",
+            "Keterangan"
+        ],
+
+        jawaban: 3
+    },
+
+    {
+        pertanyaan:
+            'Dalam kalimat "Rina menjadi ketua kelas", frasa "ketua kelas" berfungsi sebagai...',
+
+        pilihan: [
+            "Subjek",
+            "Predikat",
+            "Objek",
+            "Pelengkap"
+        ],
+
+        jawaban: 3
+    },
+
+    {
+        pertanyaan:
+            'Pola kalimat "Rina belajar" adalah...',
+
+        pilihan: [
+            "S-P",
+            "S-P-O",
+            "S-P-K",
+            "S-P-Pel"
+        ],
+
+        jawaban: 0
+    },
+
+    {
+        pertanyaan:
+            'Pola kalimat "Rina membaca buku" adalah...',
+
+        pilihan: [
+            "S-P",
+            "S-P-O",
+            "S-P-K",
+            "S-P-Pel"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Pola kalimat "Rina tinggal di Garut" adalah...',
+
+        pilihan: [
+            "S-P",
+            "S-P-O",
+            "S-P-K",
+            "S-P-Pel"
+        ],
+
+        jawaban: 2
+    },
+
+    {
+        pertanyaan:
+            'Objek dapat menjadi subjek ketika kalimat diubah menjadi...',
+
+        pilihan: [
+            "Kalimat tanya",
+            "Kalimat pasif",
+            "Kalimat seru",
+            "Kalimat langsung"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Gagasan utama yang berada di awal paragraf menunjukkan paragraf...',
+
+        pilihan: [
+            "Induktif",
+            "Ineratif",
+            "Deduktif",
+            "Campuran"
+        ],
+
+        jawaban: 2
+    },
+
+    {
+        pertanyaan:
+            'Gagasan utama yang berada di akhir paragraf menunjukkan paragraf...',
+
+        pilihan: [
+            "Deduktif",
+            "Induktif",
+            "Ineratif",
+            "Campuran"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Pola umum → khusus merupakan ciri paragraf...',
+
+        pilihan: [
+            "Deduktif",
+            "Induktif",
+            "Ineratif",
+            "Campuran"
+        ],
+
+        jawaban: 0
+    },
+
+    {
+        pertanyaan:
+            'Pola khusus → umum merupakan ciri paragraf...',
+
+        pilihan: [
+            "Deduktif",
+            "Induktif",
+            "Campuran",
+            "Ineratif"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Paragraf yang memiliki gagasan utama di awal dan ditegaskan kembali di akhir disebut...',
+
+        pilihan: [
+            "Deduktif",
+            "Induktif",
+            "Campuran",
+            "Ineratif"
+        ],
+
+        jawaban: 2
+    },
+
+    {
+        pertanyaan:
+            'Paragraf yang gagasan utamanya berada di tengah disebut...',
+
+        pilihan: [
+            "Deduktif",
+            "Induktif",
+            "Campuran",
+            "Ineratif"
+        ],
+
+        jawaban: 3
+    },
+
+    {
+        pertanyaan:
+            'Kalimat yang berisi gagasan utama disebut...',
+
+        pilihan: [
+            "Kalimat penjelas",
+            "Kalimat utama",
+            "Kalimat tanya",
+            "Kalimat perintah"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Kalimat yang berfungsi menjelaskan gagasan utama disebut...',
+
+        pilihan: [
+            "Kalimat utama",
+            "Kalimat penjelas",
+            "Kalimat inti",
+            "Kalimat majemuk"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Manakah yang sering menjadi penanda simpulan dalam paragraf induktif?',
+
+        pilihan: [
+            "Namun",
+            "Misalnya",
+            "Oleh karena itu",
+            "Sedangkan"
+        ],
+
+        jawaban: 2
+    },
+
+    {
+        pertanyaan:
+            'Dalam pola S-P-O-K, huruf O berarti...',
+
+        pilihan: [
+            "Orang",
+            "Objek",
+            "Orientasi",
+            "Opini"
+        ],
+
+        jawaban: 1
+    },
+
+    {
+        pertanyaan:
+            'Dalam pola S-P-O-K, huruf K berarti...',
+
+        pilihan: [
+            "Kesimpulan",
+            "Keterangan",
+            "Kalimat",
+            "Kata"
+        ],
+
+        jawaban: 1
+    }
 
 ];
 
@@ -1053,7 +1330,6 @@ function pilihJumlah(jumlah) {
 
 
     const tombol =
-
         document.querySelector(
             '.player-count button[data-jumlah="' +
             jumlah +
@@ -1081,7 +1357,9 @@ function pilihJumlah(jumlah) {
 function buatInputNama() {
 
     const container =
-        document.getElementById("namaPemain");
+        document.getElementById(
+            "namaPemain"
+        );
 
 
     container.innerHTML = "";
@@ -1118,7 +1396,7 @@ function buatInputNama() {
 
 
 /* =====================================================
-   MULAI PERMAINAN
+   MULAI
 ===================================================== */
 
 function mulaiPermainan() {
@@ -1140,8 +1418,8 @@ function mulaiPermainan() {
 
         let nama =
             input
-            ? input.value.trim()
-            : "";
+                ? input.value.trim()
+                : "";
 
 
         if (!nama) {
@@ -1161,15 +1439,11 @@ function mulaiPermainan() {
 
             uang: 15000,
 
-            /*
-             * POSISI AWAL:
-             *
-             * 0 = START
-             */
-
             posisi: 0,
 
-            warna: warnaPemain[i]
+            warna: warnaPemain[i],
+
+            properti: []
 
         });
 
@@ -1191,6 +1465,18 @@ function mulaiPermainan() {
         .classList.remove("hidden");
 
 
+    tampilkanSemua();
+
+}
+
+
+
+/* =====================================================
+   TAMPILKAN SEMUA
+===================================================== */
+
+function tampilkanSemua() {
+
     tampilkanPemain();
 
     tampilkanPion();
@@ -1199,21 +1485,12 @@ function mulaiPermainan() {
 
     tampilkanPetak();
 
-
-    document
-        .getElementById("status")
-        .textContent =
-
-        "Permainan dimulai dari START. " +
-        "Pemain bergerak ke kiri " +
-        "sesuai arah jarum jam.";
-
 }
 
 
 
 /* =====================================================
-   TAMPILKAN PEMAIN
+   PEMAIN
 ===================================================== */
 
 function tampilkanPemain() {
@@ -1227,58 +1504,71 @@ function tampilkanPemain() {
     container.innerHTML = "";
 
 
-    pemain.forEach(function(p, i) {
+    pemain.forEach(
+        function(p, i) {
 
-        const div =
-            document.createElement(
-                "div"
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "player-card";
+
+
+            if (
+                i === pemainAktif
+            ) {
+
+                div.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            div.innerHTML = `
+
+                <span
+                    class="player-color"
+                    style="background:${p.warna}"
+                ></span>
+
+                <b>${p.nama}</b>
+
+                <br>
+
+                <span class="money">
+                    ${formatUang(p.uang)}
+                </span>
+
+                <br>
+
+                Posisi:
+                ${PETAK[p.posisi].nama}
+
+                <br>
+
+                Komplek:
+                ${p.properti.length}
+
+            `;
+
+
+            container.appendChild(
+                div
             );
 
-
-        div.className =
-            "player-card";
-
-
-        if (i === pemainAktif) {
-
-            div.classList.add("active");
-
         }
-
-
-        div.innerHTML = `
-
-            <span
-                class="player-color"
-                style="background:${p.warna}"
-            ></span>
-
-            <b>${p.nama}</b>
-
-            <br>
-
-            <span class="money">
-                ${formatUang(p.uang)}
-            </span>
-
-            <br>
-
-            Posisi:
-            ${PETAK[p.posisi].nama}
-
-        `;
-
-
-        container.appendChild(div);
-
-    });
+    );
 
 }
 
 
 
 /* =====================================================
-   TAMPILKAN GILIRAN
+   GILIRAN
 ===================================================== */
 
 function tampilkanGiliran() {
@@ -1305,15 +1595,12 @@ function tampilkanGiliran() {
         .textContent =
         formatUang(p.uang);
 
-
-    tampilkanPemain();
-
 }
 
 
 
 /* =====================================================
-   TAMPILKAN PETAK
+   INFO PETAK
 ===================================================== */
 
 function tampilkanPetak() {
@@ -1333,25 +1620,46 @@ function tampilkanPetak() {
         PETAK[p.posisi];
 
 
-    let teks =
+    let html =
         "<b>Posisi:</b> " +
         petak.nama;
 
 
-    teks +=
-        "<br>" +
-        "<b>Nomor petak:</b> " +
+    html +=
+        "<br><b>Nomor:</b> " +
         petak.id;
 
 
     if (
-        petak.harga > 0
+        petak.tipe === "komplek"
     ) {
 
-        teks +=
-            "<br>" +
-            "<b>Harga:</b> " +
-            formatUang(petak.harga);
+        html +=
+            "<br><b>Harga:</b> " +
+            formatUang(
+                petak.harga
+            );
+
+
+        html +=
+            "<br><b>Sewa minimum:</b> " +
+            formatUang(
+                sewaMinimum(petak)
+            );
+
+    }
+
+
+    const pemilik =
+        cariPemilik(petak.id);
+
+
+    if (pemilik) {
+
+        html +=
+            `<br><span class="owner">
+                Milik: ${pemilik.nama}
+            </span>`;
 
     }
 
@@ -1359,40 +1667,136 @@ function tampilkanPetak() {
     document
         .getElementById("petakInfo")
         .innerHTML =
-        teks;
+        html;
 
 }
 
 
 
 /* =====================================================
-   FORMAT UANG
+   PION
 ===================================================== */
 
-function formatUang(jumlah) {
+function tampilkanPion() {
 
-    return (
+    const container =
+        document.getElementById(
+            "tokens"
+        );
 
-        "Rp" +
 
-        Number(jumlah)
-            .toLocaleString("id-ID") +
+    container.innerHTML = "";
 
-        ",-"
 
-    );
+    const posisiSama = {};
+
+
+    pemain.forEach(function(p) {
+
+        if (
+            !posisiSama[p.posisi]
+        ) {
+
+            posisiSama[p.posisi] = [];
+
+        }
+
+
+        posisiSama[p.posisi].push(p);
+
+    });
+
+
+    pemain.forEach(function(p) {
+
+        const k =
+            KOORDINAT[p.posisi];
+
+
+        const daftar =
+            posisiSama[p.posisi];
+
+
+        const urutan =
+            daftar.indexOf(p);
+
+
+        const pola = [
+
+            [-1, -1],
+            [1, -1],
+            [-1, 1],
+            [1, 1],
+            [0, -1],
+            [0, 1],
+            [0, 0]
+
+        ];
+
+
+        const offset =
+            pola[
+                urutan %
+                pola.length
+            ];
+
+
+        const pion =
+            document.createElement(
+                "div"
+            );
+
+
+        pion.className =
+            "token";
+
+
+        pion.style.left =
+            (
+                k.x +
+                offset[0] * 1.2
+            ) + "%";
+
+
+        pion.style.top =
+            (
+                k.y +
+                offset[1] * 1.2
+            ) + "%";
+
+
+        pion.style.background =
+            p.warna;
+
+
+        pion.textContent =
+            p.id + 1;
+
+
+        pion.title =
+            p.nama;
+
+
+        container.appendChild(
+            pion
+        );
+
+    });
 
 }
 
 
 
 /* =====================================================
-   LEMPAR DADU
+   DADU
 ===================================================== */
 
 function lemparDadu() {
 
-    if (!sedangBerjalan) {
+    if (
+        !sedangBerjalan ||
+        prosesSoal
+    ) {
 
         return;
 
@@ -1427,11 +1831,9 @@ function lemparDadu() {
     document
         .getElementById("status")
         .textContent =
-
         p.nama +
-        " mendapatkan angka " +
-        angka +
-        ".";
+        " mendapat angka " +
+        angka;
 
 
     bergerakPion(
@@ -1444,23 +1846,7 @@ function lemparDadu() {
 
 
 /* =====================================================
-   GERAK PION
-
-   INI ARAH UTAMA GAME.
-
-   posisi bertambah:
-
-   0 → 1 → 2 → 3 ...
-
-   Artinya:
-
-   START
-   → Lampung
-   → Dana Umum
-   → Jambi
-   → ...
-
-   sehingga gerakan pertama memang KE KIRI.
+   GERAK
 ===================================================== */
 
 function bergerakPion(
@@ -1471,27 +1857,11 @@ function bergerakPion(
     let jalan = 0;
 
 
-    const posisiSebelum =
-        p.posisi;
-
-
     const interval =
         setInterval(function() {
 
-
-            /* -----------------------------------------
-               SATU LANGKAH
-            ----------------------------------------- */
-
             p.posisi++;
 
-
-            /* -----------------------------------------
-               MELEWATI START
-
-               Dari Jakarta (39)
-               menuju START (0)
-            ----------------------------------------- */
 
             if (
                 p.posisi >=
@@ -1502,38 +1872,19 @@ function bergerakPion(
 
 
                 /*
-                 * Bonus melewati START.
+                 * BONUS MELEWATI START
                  */
 
                 p.uang += 200;
 
-
-                document
-                    .getElementById("status")
-                    .textContent =
-
-                    p.nama +
-                    " melewati START " +
-                    "dan menerima bonus " +
-                    formatUang(200) +
-                    ".";
-
             }
-
-
-            tampilkanPion();
-
-            tampilkanGiliran();
-
-            tampilkanPetak();
 
 
             jalan++;
 
 
-            /* -----------------------------------------
-               SELESAI BERJALAN
-            ----------------------------------------- */
+            tampilkanSemua();
+
 
             if (
                 jalan >= langkah
@@ -1544,185 +1895,892 @@ function bergerakPion(
                 );
 
 
-                const petakAkhir =
-                    PETAK[p.posisi];
-
-
-                document
-                    .getElementById("status")
-                    .textContent =
-
-                    p.nama +
-                    " berhenti di " +
-                    petakAkhir.nama +
-                    ".";
-
-
                 setTimeout(
-                    gantiGiliran,
-                    1200
+                    prosesPetak,
+                    500
                 );
 
             }
 
-
-        }, 350);
+        }, 300);
 
 }
 
 
 
 /* =====================================================
-   TAMPILKAN PION
-
-   Koordinat mengikuti gambar asli.
+   PROSES PETAK
 ===================================================== */
 
-function tampilkanPion() {
+function prosesPetak() {
 
-    const container =
-        document.getElementById(
-            "tokens"
-        );
+    const p =
+        pemain[pemainAktif];
 
 
-    container.innerHTML = "";
+    const petak =
+        PETAK[p.posisi];
 
 
     /*
-     * Menghitung pemain yang
-     * sedang berada pada petak yang sama.
+     * HANYA KOMPLEK
+     * YANG DIPROSES DENGAN SOAL
+     * PADA TAHAP INI.
      */
 
-    const jumlahDiPetak = {};
+    if (
+        petak.tipe ===
+        "komplek"
+    ) {
+
+        bukaSoalKomplek();
+
+        return;
+
+    }
 
 
-    pemain.forEach(function(p) {
+    /*
+     * Petak lain belum kita aktifkan.
+     */
+
+    document
+        .getElementById("status")
+        .textContent =
+
+        p.nama +
+        " berhenti di " +
+        petak.nama +
+        ".";
+
+
+    setTimeout(
+        gantiGiliran,
+        1000
+    );
+
+}
+
+
+
+/* =====================================================
+   PEMILIK
+===================================================== */
+
+function cariPemilik(
+    petakId
+) {
+
+    for (
+        const p of pemain
+    ) {
 
         if (
-            !jumlahDiPetak[p.posisi]
+            p.properti.includes(
+                petakId
+            )
         ) {
 
-            jumlahDiPetak[p.posisi] = [];
+            return p;
 
         }
 
-
-        jumlahDiPetak[p.posisi]
-            .push(p);
-
-    });
+    }
 
 
-    pemain.forEach(function(p) {
+    return null;
 
-        const koordinat =
-            KOORDINAT[p.posisi];
-
-
-        const daftar =
-            jumlahDiPetak[p.posisi];
+}
 
 
-        const urutan =
-            daftar.indexOf(p);
+
+/* =====================================================
+   SOAL KOMPLEK
+===================================================== */
+
+function bukaSoalKomplek() {
+
+    const p =
+        pemain[pemainAktif];
 
 
-        /*
-         * Jika beberapa pemain berada
-         * pada petak yang sama,
-         * pion sedikit digeser agar
-         * semuanya tetap terlihat.
-         */
-
-        let offsetX = 0;
-
-        let offsetY = 0;
+    const petak =
+        PETAK[p.posisi];
 
 
-        if (
-            daftar.length > 1
-        ) {
+    prosesSoal = {
 
-            const pola = [
+        pemain: p,
 
-                [-1, -1],
+        petak: petak,
 
-                [1, -1],
+        soal:
+            SOAL[
+                Math.floor(
+                    Math.random() *
+                    SOAL.length
+                )
+            ]
 
-                [-1, 1],
-
-                [1, 1],
-
-                [0, -1],
-
-                [0, 1],
-
-                [0, 0]
-
-            ];
+    };
 
 
-            const posisiOffset =
-                pola[
-                    urutan %
-                    pola.length
-                ];
+    const modal =
+        document.getElementById(
+            "questionModal"
+        );
 
 
-            offsetX =
-                posisiOffset[0] *
-                1.2;
+    const title =
+        document.getElementById(
+            "questionTitle"
+        );
 
 
-            offsetY =
-                posisiOffset[1] *
-                1.2;
+    const question =
+        document.getElementById(
+            "questionText"
+        );
+
+
+    const answers =
+        document.getElementById(
+            "answerList"
+        );
+
+
+    const result =
+        document.getElementById(
+            "questionResult"
+        );
+
+
+    const close =
+        document.getElementById(
+            "questionClose"
+        );
+
+
+    title.textContent =
+        "📚 Pertanyaan — " +
+        petak.nama;
+
+
+    question.textContent =
+        prosesSoal.soal.pertanyaan;
+
+
+    answers.innerHTML = "";
+
+
+    result.className =
+        "result-box hidden";
+
+
+    result.innerHTML = "";
+
+
+    close.classList.add(
+        "hidden"
+    );
+
+
+    prosesSoal.soal.pilihan
+        .forEach(
+            function(pilihan, index) {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.className =
+                    "answer-button";
+
+
+                button.textContent =
+                    String.fromCharCode(
+                        65 + index
+                    ) +
+                    ". " +
+                    pilihan;
+
+
+                button.onclick =
+                    function() {
+
+                        jawabSoal(
+                            index
+                        );
+
+                    };
+
+
+                answers.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+    modal.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+
+/* =====================================================
+   JAWAB SOAL
+===================================================== */
+
+function jawabSoal(
+    pilihan
+) {
+
+    if (!prosesSoal) {
+
+        return;
+
+    }
+
+
+    const soal =
+        prosesSoal.soal;
+
+
+    const p =
+        prosesSoal.pemain;
+
+
+    const petak =
+        prosesSoal.petak;
+
+
+    const tombol =
+        document.querySelectorAll(
+            ".answer-button"
+        );
+
+
+    tombol.forEach(
+        function(button) {
+
+            button.disabled = true;
 
         }
+    );
 
 
-        const pion =
-            document.createElement(
-                "div"
+    const benar =
+        pilihan ===
+        soal.jawaban;
+
+
+    if (benar) {
+
+        tombol[pilihan]
+            .classList.add(
+                "correct"
             );
 
 
-        pion.className =
-            "token";
+        prosesJawabanBenar();
+
+    }
+
+    else {
+
+        tombol[pilihan]
+            .classList.add(
+                "wrong"
+            );
 
 
-        pion.style.left =
-            (
-                koordinat.x +
-                offsetX
-            ) + "%";
+        tombol[soal.jawaban]
+            .classList.add(
+                "correct"
+            );
 
 
-        pion.style.top =
-            (
-                koordinat.y +
-                offsetY
-            ) + "%";
+        prosesJawabanSalah();
+
+    }
+
+}
 
 
-        pion.style.background =
-            p.warna;
+
+/* =====================================================
+   JAWABAN BENAR
+===================================================== */
+
+function prosesJawabanBenar() {
+
+    const p =
+        prosesSoal.pemain;
 
 
-        pion.textContent =
-            p.id + 1;
+    const petak =
+        prosesSoal.petak;
 
 
-        pion.title =
-            p.nama;
-
-
-        container.appendChild(
-            pion
+    const pemilik =
+        cariPemilik(
+            petak.id
         );
 
-    });
+
+    const result =
+        document.getElementById(
+            "questionResult"
+        );
+
+
+    result.className =
+        "result-box result-correct";
+
+
+    /*
+     * KOMPLEK BELUM DIMILIKI
+     */
+
+    if (!pemilik) {
+
+        result.innerHTML = `
+
+            <b>✅ Jawaban benar!</b>
+
+            <br><br>
+
+            Kamu berhak membeli
+            <b>${petak.nama}</b>.
+
+            <br><br>
+
+            Harga:
+            <b>${formatUang(
+                petak.harga
+            )}</b>
+
+            <br><br>
+
+            Saldo kamu:
+            <b>${formatUang(
+                p.uang
+            )}</b>
+
+        `;
+
+
+        const close =
+            document.getElementById(
+                "questionClose"
+            );
+
+
+        close.className =
+            "action-button buy-button";
+
+
+        close.textContent =
+            "BELI KOMPLEK";
+
+
+        close.onclick =
+            function() {
+
+                beliKomplek();
+
+            };
+
+
+        close.classList.remove(
+            "hidden"
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+     * KOMPLEK MILIK SENDIRI
+     */
+
+    if (
+        pemilik.id === p.id
+    ) {
+
+        result.innerHTML = `
+
+            <b>✅ Jawaban benar!</b>
+
+            <br><br>
+
+            Komplek
+            <b>${petak.nama}</b>
+            sudah menjadi milikmu.
+
+            <br><br>
+
+            Tidak ada pembayaran.
+
+        `;
+
+
+        const close =
+            document.getElementById(
+                "questionClose"
+            );
+
+
+        close.className =
+            "action-button";
+
+
+        close.textContent =
+            "LANJUTKAN";
+
+
+        close.onclick =
+            function() {
+
+                tutupPertanyaan();
+
+            };
+
+
+        close.classList.remove(
+            "hidden"
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+     * KOMPLEK MILIK PEMAIN LAIN
+     */
+
+    const sewa =
+        petak.harga;
+
+
+    if (
+        p.uang < sewa
+    ) {
+
+        bayarSemampunya(
+            p,
+            pemilik,
+            sewa
+        );
+
+    }
+
+    else {
+
+        p.uang -= sewa;
+
+        pemilik.uang += sewa;
+
+    }
+
+
+    result.innerHTML = `
+
+        <b>✅ Jawaban benar!</b>
+
+        <br><br>
+
+        Komplek ini milik
+        <b>${pemilik.nama}</b>.
+
+        <br><br>
+
+        Kamu membayar sewa:
+
+        <b>${formatUang(
+            sewa
+        )}</b>
+
+        kepada
+        <b>${pemilik.nama}</b>.
+
+    `;
+
+
+    const close =
+        document.getElementById(
+            "questionClose"
+        );
+
+
+    close.className =
+        "action-button";
+
+
+    close.textContent =
+        "LANJUTKAN";
+
+
+    close.onclick =
+        function() {
+
+            tutupPertanyaan();
+
+        };
+
+
+    close.classList.remove(
+        "hidden"
+    );
+
+
+    tampilkanSemua();
+
+}
+
+
+
+/* =====================================================
+   JAWABAN SALAH
+===================================================== */
+
+function prosesJawabanSalah() {
+
+    const p =
+        prosesSoal.pemain;
+
+
+    const petak =
+        prosesSoal.petak;
+
+
+    const denda =
+        sewaMinimum(
+            petak
+        );
+
+
+    const result =
+        document.getElementById(
+            "questionResult"
+        );
+
+
+    if (
+        p.uang >= denda
+    ) {
+
+        p.uang -= denda;
+
+    }
+
+    else {
+
+        p.uang = 0;
+
+    }
+
+
+    result.className =
+        "result-box result-wrong";
+
+
+    result.innerHTML = `
+
+        <b>❌ Jawaban salah.</b>
+
+        <br><br>
+
+        Kamu tidak mendapatkan
+        <b>${petak.nama}</b>.
+
+        <br><br>
+
+        Kamu harus membayar
+        denda sewa minimum:
+
+        <br>
+
+        <b>${formatUang(
+            denda
+        )}</b>
+
+        <br><br>
+
+        Denda masuk ke bank.
+
+    `;
+
+
+    const close =
+        document.getElementById(
+            "questionClose"
+        );
+
+
+    close.className =
+        "action-button";
+
+
+    close.textContent =
+        "LANJUTKAN";
+
+
+    close.onclick =
+        function() {
+
+            tutupPertanyaan();
+
+        };
+
+
+    close.classList.remove(
+        "hidden"
+    );
+
+
+    tampilkanSemua();
+
+}
+
+
+
+/* =====================================================
+   BELI KOMPLEK
+===================================================== */
+
+function beliKomplek() {
+
+    const p =
+        prosesSoal.pemain;
+
+
+    const petak =
+        prosesSoal.petak;
+
+
+    /*
+     * Pemeriksaan saldo.
+     */
+
+    if (
+        p.uang <
+        petak.harga
+    ) {
+
+        const result =
+            document.getElementById(
+                "questionResult"
+            );
+
+
+        result.className =
+            "result-box result-wrong";
+
+
+        result.innerHTML = `
+
+            <b>💰 Uang tidak cukup.</b>
+
+            <br><br>
+
+            Harga
+            <b>${petak.nama}</b>:
+
+            <b>${formatUang(
+                petak.harga
+            )}</b>
+
+            <br><br>
+
+            Uang kamu:
+
+            <b>${formatUang(
+                p.uang
+            )}</b>
+
+            <br><br>
+
+            Karena tidak mampu membeli,
+            kamu membayar sewa minimum:
+
+            <b>${formatUang(
+                sewaMinimum(petak)
+            )}</b>
+
+            sebagai denda.
+
+        `;
+
+
+        const denda =
+            sewaMinimum(petak);
+
+
+        p.uang =
+            Math.max(
+                0,
+                p.uang - denda
+            );
+
+
+        const close =
+            document.getElementById(
+                "questionClose"
+            );
+
+
+        close.textContent =
+            "LANJUTKAN";
+
+
+        close.className =
+            "action-button";
+
+
+        close.onclick =
+            function() {
+
+                tutupPertanyaan();
+
+            };
+
+
+        tampilkanSemua();
+
+        return;
+
+    }
+
+
+    /*
+     * BAYAR HARGA KOMPLEK
+     */
+
+    p.uang -=
+        petak.harga;
+
+
+    /*
+     * SIMPAN KEPEMILIKAN
+     */
+
+    p.properti.push(
+        petak.id
+    );
+
+
+    const result =
+        document.getElementById(
+            "questionResult"
+        );
+
+
+    result.className =
+        "result-box result-correct";
+
+
+    result.innerHTML = `
+
+        <b>🎉 Komplek berhasil dibeli!</b>
+
+        <br><br>
+
+        Kamu sekarang memiliki:
+
+        <br>
+
+        <b>${petak.nama}</b>
+
+        <br><br>
+
+        Harga:
+
+        <b>${formatUang(
+            petak.harga
+        )}</b>
+
+        <br><br>
+
+        Sisa uang:
+
+        <b>${formatUang(
+            p.uang
+        )}</b>
+
+    `;
+
+
+    const close =
+        document.getElementById(
+            "questionClose"
+        );
+
+
+    close.textContent =
+        "SELESAI";
+
+
+    close.className =
+        "action-button";
+
+
+    close.onclick =
+        function() {
+
+            tutupPertanyaan();
+
+        };
+
+
+    tampilkanSemua();
+
+}
+
+
+
+/* =====================================================
+   TUTUP SOAL
+===================================================== */
+
+function tutupPertanyaan() {
+
+    document
+        .getElementById(
+            "questionModal"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+
+    prosesSoal = null;
+
+
+    document
+        .getElementById(
+            "status"
+        )
+        .textContent =
+
+        pemain[pemainAktif].nama +
+        " menyelesaikan petak.";
+
+
+    setTimeout(
+        gantiGiliran,
+        700
+    );
 
 }
 
@@ -1747,18 +2805,20 @@ function gantiGiliran() {
     }
 
 
-    tampilkanGiliran();
-
-    tampilkanPetak();
+    tampilkanSemua();
 
 
     document
-        .getElementById("lempar")
+        .getElementById(
+            "lempar"
+        )
         .disabled = false;
 
 
     document
-        .getElementById("status")
+        .getElementById(
+            "status"
+        )
         .textContent =
 
         "Giliran " +
@@ -1770,11 +2830,53 @@ function gantiGiliran() {
 
 
 /* =====================================================
-   INISIALISASI
+   FORMAT UANG
+===================================================== */
+
+function formatUang(
+    jumlah
+) {
+
+    return (
+        "Rp" +
+        Number(jumlah)
+            .toLocaleString("id-ID") +
+        ",-"
+    );
+
+}
+
+
+
+/* =====================================================
+   PEMBAYARAN JIKA UANG TIDAK CUKUP
+===================================================== */
+
+function bayarSemampunya(
+    pembayar,
+    penerima,
+    jumlah
+) {
+
+    const tersedia =
+        pembayar.uang;
+
+
+    pembayar.uang = 0;
+
+
+    penerima.uang +=
+        tersedia;
+
+}
+
+
+
+/* =====================================================
+   MULAI DEFAULT
 ===================================================== */
 
 pilihJumlah(2);
-
 
 </script>
 
