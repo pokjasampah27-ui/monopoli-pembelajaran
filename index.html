@@ -1,259 +1,929 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<title>Monopoli Pembelajaran</title>
 
-    <title>Monopoli Pembelajaran</title>
+<style>
 
-    <style>
+*{
+    box-sizing:border-box;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+body{
+    margin:0;
+    background:#163b2c;
+    font-family:Arial,sans-serif;
+    color:#222;
+}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: #163b2c;
-            font-family: Arial, sans-serif;
-            color: #222;
-        }
+header{
+    background:#163b2c;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
 
-        header {
-            background: #163b2c;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
+header h1{
+    margin:0;
+    font-size:25px;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
+header p{
+    margin:5px 0 0;
+}
 
-        header p {
-            margin: 5px 0 0;
-            opacity: .85;
-        }
+.setup{
+    width:min(700px,94%);
+    margin:25px auto;
+    background:#fffdf7;
+    padding:25px;
+    border-radius:15px;
+}
 
-        .game-container {
-            width: min(1400px, 96%);
-            margin: 15px auto;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 320px;
-            gap: 15px;
-        }
+.setup h2{
+    color:#163b2c;
+}
 
-        .board-container {
-            background: #111;
-            padding: 8px;
-            border-radius: 12px;
-        }
+.player-count{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:7px;
+    margin:10px 0 20px;
+}
 
-        .board {
-            width: 100%;
-            background: white;
-            border-radius: 6px;
-            overflow: hidden;
-        }
+.player-count button{
+    padding:12px;
+    border:1px solid #aaa;
+    border-radius:8px;
+    background:white;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-        .board img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
+.player-count button.active{
+    background:#163b2c;
+    color:white;
+}
 
-        .panel {
-            background: #fffdf7;
-            border-radius: 12px;
-            padding: 18px;
-        }
+.player-input{
+    display:grid;
+    grid-template-columns:40px 1fr;
+    gap:8px;
+    margin-bottom:8px;
+}
 
-        .panel h2 {
-            margin-top: 0;
-            color: #163b2c;
-        }
+.player-input div{
+    display:grid;
+    place-items:center;
+    background:#e9eee9;
+    border-radius:7px;
+    font-weight:bold;
+}
 
-        .player-box {
-            padding: 12px;
-            background: #edf3ef;
-            border-radius: 8px;
-            margin-bottom: 12px;
-        }
+.player-input input{
+    width:100%;
+    padding:11px;
+    border:1px solid #bbb;
+    border-radius:7px;
+}
 
-        .money {
-            color: #176b3a;
-            font-size: 20px;
-            font-weight: bold;
-        }
+.start-button,
+.roll-button{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:8px;
+    background:#163b2c;
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
 
-        button {
-            width: 100%;
-            padding: 13px;
-            margin-top: 8px;
-            border: 0;
-            border-radius: 8px;
-            background: #163b2c;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.game{
+    width:min(1450px,96%);
+    margin:15px auto;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 330px;
+    gap:15px;
+}
 
-        button:hover {
-            background: #255743;
-        }
+.board-container{
+    background:#111;
+    padding:8px;
+    border-radius:12px;
+}
 
-        .dice {
-            text-align: center;
-            font-size: 60px;
-            margin: 10px 0;
-        }
+.board{
+    position:relative;
+    background:white;
+    overflow:hidden;
+    border-radius:6px;
+}
 
-        #status {
-            margin-top: 12px;
-            padding: 10px;
-            background: #f0eadb;
-            border-radius: 8px;
-            font-size: 14px;
-        }
+.board img{
+    display:block;
+    width:100%;
+}
 
-        @media (max-width: 900px) {
+.tokens{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
 
-            .game-container {
-                grid-template-columns: 1fr;
-            }
+.token{
+    position:absolute;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    border:3px solid white;
+    box-shadow:0 2px 5px #0008;
+    transform:translate(-50%,-50%);
+    display:grid;
+    place-items:center;
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+    transition:all .35s;
+}
 
-            .panel {
-                order: -1;
-            }
+.panel{
+    background:#fffdf7;
+    padding:15px;
+    border-radius:12px;
+}
 
-        }
+.player-card{
+    background:#edf3ef;
+    border-radius:8px;
+    padding:10px;
+    margin-bottom:7px;
+}
 
-    </style>
+.player-card.active{
+    border:3px solid #d5a62d;
+}
+
+.player-color{
+    display:inline-block;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    margin-right:5px;
+}
+
+.money{
+    color:#176b3a;
+    font-weight:bold;
+}
+
+.dice{
+    text-align:center;
+    font-size:65px;
+    margin:10px;
+}
+
+.status{
+    margin-top:10px;
+    padding:10px;
+    background:#eee7d6;
+    border-radius:8px;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:900px){
+
+    .game{
+        grid-template-columns:1fr;
+    }
+
+    .panel{
+        order:-1;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
+
 <header>
 
-    <h1>MONOPOLI PEMBELAJARAN</h1>
+<h1>MONOPOLI PEMBELAJARAN</h1>
 
-    <p>
-        Bahasa Indonesia —
-        Fungsi Kalimat & Ragam Paragraf
-    </p>
+<p>
+Bahasa Indonesia —
+Fungsi Kalimat & Ragam Paragraf
+</p>
 
 </header>
 
 
-<div class="game-container">
+<!-- =========================
+     PENGATURAN PEMAIN
+========================= -->
+
+<section
+    id="setup"
+    class="setup"
+>
+
+<h2>🎮 Persiapan Permainan</h2>
+
+<p>
+Pilih jumlah pemain.
+Maksimal 7 pemain.
+</p>
 
 
-    <!-- PAPAN -->
+<div class="player-count">
 
-    <div class="board-container">
-
-        <div class="board">
-
-            <img
-                src="assets/papan-monopoli.jpg"
-                alt="Papan Monopoli Pembelajaran"
-            >
-
-        </div>
-
-    </div>
-
-
-    <!-- PANEL PERMAINAN -->
-
-    <div class="panel">
-
-        <h2>🎮 Permainan</h2>
-
-
-        <div class="player-box">
-
-            <b>Pemain Aktif</b>
-
-            <div id="playerName">
-                Pemain 1
-            </div>
-
-            <div
-                id="playerMoney"
-                class="money"
-            >
-                Rp15.000,-
-            </div>
-
-        </div>
-
-
-        <div class="dice">
-
-            🎲
-
-        </div>
-
-
-        <button onclick="lemparDadu()">
-
-            LEMPAR DADU
-
-        </button>
-
-
-        <button onclick="mulaiGame()">
-
-            MULAI PERMAINAN
-
-        </button>
-
-
-        <div id="status">
-
-            Permainan siap dimulai.
-
-        </div>
-
-    </div>
+<button onclick="pilihJumlah(2)">2</button>
+<button onclick="pilihJumlah(3)">3</button>
+<button onclick="pilihJumlah(4)">4</button>
+<button onclick="pilihJumlah(5)">5</button>
+<button onclick="pilihJumlah(6)">6</button>
+<button onclick="pilihJumlah(7)">7</button>
 
 </div>
 
 
+<div id="namaPemain"></div>
+
+
+<button
+    class="start-button"
+    onclick="mulaiPermainan()"
+>
+    MULAI PERMAINAN
+</button>
+
+</section>
+
+
+
+<!-- =========================
+     AREA GAME
+========================= -->
+
+<section
+    id="game"
+    class="game hidden"
+>
+
+
+<div class="board-container">
+
+<div
+    id="board"
+    class="board"
+>
+
+<img
+    src="assets/papan-monopoli.jpg"
+    alt="Papan Monopoli"
+>
+
+<div
+    id="tokens"
+    class="tokens"
+></div>
+
+</div>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>🎲 Permainan</h2>
+
+
+<div id="daftarPemain"></div>
+
+
+<hr>
+
+
+<h3>Giliran</h3>
+
+<div id="giliran">
+-
+</div>
+
+
+<div
+    id="uangGiliran"
+    class="money"
+>
+Rp0,-
+</div>
+
+
+<div
+    id="dadu"
+    class="dice"
+>
+🎲
+</div>
+
+
+<button
+    id="lempar"
+    class="roll-button"
+    onclick="lemparDadu()"
+>
+LEMPAR DADU
+</button>
+
+
+<div
+    id="status"
+    class="status"
+>
+Permainan siap.
+</div>
+
+
+</div>
+
+</section>
+
+
+
 <script>
 
-function mulaiGame() {
 
-    document.getElementById("status").textContent =
-        "Permainan dimulai! Giliran Pemain 1.";
+// ========================================
+// DATA PERMAINAN
+// ========================================
+
+let jumlahPemain = 2;
+
+let pemain = [];
+
+let pemainAktif = 0;
+
+let sedangBerjalan = false;
+
+
+// warna pion
+
+const warnaPemain = [
+
+"#d62828",
+"#2474d2",
+"#2a9d62",
+"#f4a261",
+"#7b3fb5",
+"#008c95",
+"#e07a00"
+
+];
+
+
+// ========================================
+// PILIH JUMLAH PEMAIN
+// ========================================
+
+function pilihJumlah(jumlah){
+
+    jumlahPemain = jumlah;
+
+    document
+        .querySelectorAll(".player-count button")
+        .forEach(function(button){
+
+            button.classList.remove("active");
+
+        });
+
+    event.target.classList.add("active");
+
+    buatInputNama();
 
 }
 
 
-function lemparDadu() {
+// ========================================
+// INPUT NAMA
+// ========================================
 
-    const angka =
-        Math.floor(Math.random() * 6) + 1;
+function buatInputNama(){
 
-    document.querySelector(".dice").textContent =
+    let container =
+        document.getElementById("namaPemain");
+
+    container.innerHTML = "";
+
+    for(
+        let i=0;
+        i<jumlahPemain;
+        i++
+    ){
+
+        container.innerHTML += `
+
+        <div class="player-input">
+
+            <div>
+                ${i+1}
+            </div>
+
+            <input
+                id="nama${i}"
+                value="Pemain ${i+1}"
+                maxlength="20"
+            >
+
+        </div>
+
+        `;
+
+    }
+
+}
+
+
+// ========================================
+// MULAI PERMAINAN
+// ========================================
+
+function mulaiPermainan(){
+
+    pemain = [];
+
+    for(
+        let i=0;
+        i<jumlahPemain;
+        i++
+    ){
+
+        let nama =
+            document
+            .getElementById("nama"+i)
+            .value
+            .trim();
+
+        if(!nama){
+
+            nama =
+                "Pemain "+(i+1);
+
+        }
+
+        pemain.push({
+
+            id:i,
+
+            nama:nama,
+
+            uang:15000,
+
+            posisi:0,
+
+            warna:warnaPemain[i]
+
+        });
+
+    }
+
+
+    pemainAktif = 0;
+
+    sedangBerjalan = true;
+
+
+    document
+        .getElementById("setup")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("game")
+        .classList.remove("hidden");
+
+
+    tampilkanPemain();
+
+    tampilkanPion();
+
+    tampilkanGiliran();
+
+
+    document
+        .getElementById("status")
+        .textContent =
+        "Permainan dimulai. Giliran "+
+        pemain[0].nama+".";
+
+
+}
+
+
+// ========================================
+// TAMPILKAN PEMAIN
+// ========================================
+
+function tampilkanPemain(){
+
+    let container =
+        document.getElementById("daftarPemain");
+
+    container.innerHTML = "";
+
+
+    pemain.forEach(function(p,i){
+
+        let div =
+            document.createElement("div");
+
+
+        div.className =
+            "player-card";
+
+
+        if(i===pemainAktif){
+
+            div.classList.add("active");
+
+        }
+
+
+        div.innerHTML = `
+
+            <span
+                class="player-color"
+                style="background:${p.warna}"
+            ></span>
+
+            <b>${p.nama}</b>
+
+            <br>
+
+            <span class="money">
+                ${formatUang(p.uang)}
+            </span>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+// ========================================
+// TAMPILKAN GILIRAN
+// ========================================
+
+function tampilkanGiliran(){
+
+    let p =
+        pemain[pemainAktif];
+
+
+    document
+        .getElementById("giliran")
+        .textContent =
+        p.nama;
+
+
+    document
+        .getElementById("uangGiliran")
+        .textContent =
+        formatUang(p.uang);
+
+
+    tampilkanPemain();
+
+}
+
+
+// ========================================
+// FORMAT UANG
+// ========================================
+
+function formatUang(jumlah){
+
+    return "Rp"+
+        jumlah.toLocaleString("id-ID")+
+        ",-";
+
+}
+
+
+// ========================================
+// LEMPAR DADU
+// ========================================
+
+function lemparDadu(){
+
+    if(!sedangBerjalan){
+
+        return;
+
+    }
+
+
+    let tombol =
+        document.getElementById("lempar");
+
+
+    tombol.disabled = true;
+
+
+    let angka =
+        Math.floor(
+            Math.random()*6
+        )+1;
+
+
+    document
+        .getElementById("dadu")
+        .textContent =
         angka;
 
-    document.getElementById("status").textContent =
-        "Dadu menunjukkan angka " + angka + ".";
+
+    let p =
+        pemain[pemainAktif];
+
+
+    document
+        .getElementById("status")
+        .textContent =
+        p.nama+
+        " mendapatkan angka "+
+        angka+
+        ".";
+
+
+    bergerakPion(
+        p,
+        angka
+    );
 
 }
+
+
+// ========================================
+// GERAK PION
+// ========================================
+
+function bergerakPion(
+    p,
+    langkah
+){
+
+    let jalan =
+        0;
+
+
+    let interval =
+        setInterval(function(){
+
+            p.posisi++;
+
+            if(
+                p.posisi>=40
+            ){
+
+                p.posisi=0;
+
+                p.uang+=200;
+
+            }
+
+
+            tampilkanPion();
+
+            tampilkanGiliran();
+
+
+            jalan++;
+
+
+            if(
+                jalan>=langkah
+            ){
+
+                clearInterval(
+                    interval
+                );
+
+
+                document
+                    .getElementById("status")
+                    .textContent =
+                    p.nama+
+                    " berhenti di petak "+
+                    p.posisi+
+                    ".";
+
+
+                setTimeout(
+                    gantiGiliran,
+                    1200
+                );
+
+            }
+
+        },300);
+
+}
+
+
+// ========================================
+// POSISI PION
+// ========================================
+
+function posisiPapan(posisi){
+
+    /*
+    sementara kita menggunakan
+    posisi mengelilingi papan.
+
+    Nantinya koordinat ini akan
+    kita sesuaikan persis dengan
+    desain papanmu.
+    */
+
+
+    if(posisi<=10){
+
+        return {
+
+            left:
+                5+
+                posisi*9+"%",
+
+            top:"95%"
+
+        };
+
+    }
+
+
+    if(posisi<=20){
+
+        return {
+
+            left:"95%",
+
+            top:
+                95-
+                (posisi-10)*9+
+                "%"
+
+        };
+
+    }
+
+
+    if(posisi<=30){
+
+        return {
+
+            left:
+                95-
+                (posisi-20)*9+
+                "%",
+
+            top:"5%"
+
+        };
+
+    }
+
+
+    return {
+
+        left:"5%",
+
+        top:
+            5+
+            (posisi-30)*9+
+            "%"
+
+    };
+
+}
+
+
+// ========================================
+// TAMPILKAN PION
+// ========================================
+
+function tampilkanPion(){
+
+    let container =
+        document.getElementById(
+            "tokens"
+        );
+
+
+    container.innerHTML = "";
+
+
+    pemain.forEach(function(p){
+
+        let pion =
+            document.createElement(
+                "div"
+            );
+
+
+        pion.className =
+            "token";
+
+
+        let posisi =
+            posisiPapan(
+                p.posisi
+            );
+
+
+        pion.style.left =
+            posisi.left;
+
+
+        pion.style.top =
+            posisi.top;
+
+
+        pion.style.background =
+            p.warna;
+
+
+        pion.textContent =
+            p.id+1;
+
+
+        container.appendChild(
+            pion
+        );
+
+    });
+
+}
+
+
+// ========================================
+// GANTI GILIRAN
+// ========================================
+
+function gantiGiliran(){
+
+    pemainAktif++;
+
+
+    if(
+        pemainAktif>=
+        pemain.length
+    ){
+
+        pemainAktif=0;
+
+    }
+
+
+    tampilkanGiliran();
+
+
+    document
+        .getElementById("lempar")
+        .disabled = false;
+
+
+    document
+        .getElementById("status")
+        .textContent =
+        "Giliran "+
+        pemain[pemainAktif].nama+
+        ".";
+
+}
+
+
+// ========================================
+// JALANKAN AWAL
+// ========================================
+
+pilihJumlah(2);
 
 </script>
 
 </body>
-
 </html>
